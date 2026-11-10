@@ -20,6 +20,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, quote, urlparse
 
 import tempfile
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = Path(tempfile.gettempdir()) / "data"
