@@ -61,18 +61,17 @@ def db() -> sqlite3.Connection:
         pass
 
     # Автоматическое создание админа
-    admin_exists = con.execute("SELECT 1 FROM users WHERE email = ?", ("amsa-admin",)).fetchone()
+    admin_exists = con.execute("SELECT 1 FROM users WHERE email = ?", ("amsa-admin@gmail.com",)).fetchone()
     if not admin_exists:
         admin_pass_hash = password_record("BadSanta1234")
         con.execute(
             """INSERT INTO users (full_name, email, university, course, password_hash, role, status)
                VALUES (?, ?, ?, ?, ?, ?, ?)""",
-            ("Администратор", "amsa-admin", "AMSA", "1", admin_pass_hash, "admin", "active")
+            ("Администратор", "amsa-admin@gmail.com", "AMSA", "1", admin_pass_hash, "admin", "active")
         )
         con.commit()
 
     return con
-
 
 def password_record(password: str) -> str:
     salt = secrets.token_bytes(16)
