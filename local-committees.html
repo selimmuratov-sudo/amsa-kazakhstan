@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10192b"><meta name="description" content="Локальные комитеты AMSA Kazakhstan в университетах и городах страны.">
+  <title>Локальные комитеты — AMSA Kazakhstan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="top"><div class="wrap"><span>Asian Medical Students’ Association</span><span>Казахстан · <a href="mailto:rckazakhstan@amsa-international.org">написать нам ↗</a></span></div></div>
+  <header><nav class="nav wrap" aria-label="Главная навигация"><a class="brand" href="index.html"><span class="brandmark">AM</span><span>AMSA<small>KAZAKHSTAN</small></span></a><button class="menu" aria-label="Открыть меню" aria-expanded="false">☰</button><div class="navlinks"><a href="/">Главная</a><a href="/about.html">О сообществе</a><a href="/local-committees.html" class="active-link">Комитеты</a><a href="/events.html">Мероприятия</a><a href="/opportunities.html">Возможности</a><a href="/values.html">Наши ценности</a><a href="/contacts.html">Контакты</a><a href="/news.html">Новости</a><a href="/search.html">Поиск</a></div><a class="navbtn" href="/login">Личный кабинет ↗</a></nav></header>
+  <main><section class="subhero"><div class="wrap"><div class="crumb"><a href="index.html">AMSA Kazakhstan</a> / Комитеты</div><h1>Локальные комитеты<br><em>по всему Казахстану.</em></h1><p>Студенческие сообщества AMSA в университетах страны. Каталог обновляется национальной командой; публикуются только подтверждённые комитеты.</p></div></section>
+    <section class="page-body"><div class="wrap"><div class="committee-toolbar"><div><div class="eyebrow">Каталог AMSA Kazakhstan</div><h2 class="committee-title">Найди своё сообщество.</h2></div><label class="committee-search">Поиск по городу или университету<input id="committee-query" type="search" placeholder="Например, Алматы"></label></div><div id="committee-list" class="committee-grid" aria-live="polite"><div class="committee-state">Загружаем список…</div></div></div></section>
+  </main><footer class="footer"><div class="wrap"><span>© 2026 AMSA Kazakhstan</span><a href="https://amsa-international.org/our-members/" target="_blank" rel="noreferrer">AMSA International ↗</a><a href="index.html">На главную ↑</a></div></footer>
+  <script src="local-committees.js" defer></script><script>const menu=document.querySelector('.menu'),navlinks=document.querySelector('.navlinks');menu.addEventListener('click',()=>{const open=navlinks.classList.toggle('open');menu.setAttribute('aria-expanded',open);menu.textContent=open?'×':'☰'});navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navlinks.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰'}));</script>
+</body></html>

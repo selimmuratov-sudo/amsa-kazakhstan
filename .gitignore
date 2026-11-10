@@ -1,0 +1,12 @@
+.venv/
+.env
+credentials/
+secrets/
+*service-account*.json
+__pycache__/
+.pytest_cache/
+*.py[cod]
+data/*.sqlite3
+data/*.sqlite3-*
+data/backups/
+outputs/*.zip

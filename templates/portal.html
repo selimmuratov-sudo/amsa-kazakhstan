@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10192b">
+  <title>{{ title }} — AMSA Kazakhstan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/portal.css">
+</head>
+<body data-mode="{{ mode }}">
+  <div class="top"><div class="wrap"><span>Asian Medical Students’ Association</span><span>Казахстан · <a href="mailto:rckazakhstan@amsa-international.org">написать нам ↗</a></span></div></div>
+  <header><nav class="nav wrap" aria-label="Главная навигация">
+    <a class="brand" href="/"><span class="brandmark">AM</span><span>AMSA<small>KAZAKHSTAN</small></span></a>
+    <button class="menu" aria-label="Открыть меню" aria-expanded="false">☰</button>
+    {% if mode == "admin" %}<div class="navlinks"><a href="/admin" class="active-link">Участники</a><a href="/admin/committees">Комитеты</a><a href="/admin/events">Мероприятия</a><a href="/admin/news">Новости и фото</a><a href="/admin/exchanges">Обмены</a><a href="/">Публичный сайт</a></div>{% else %}<div class="navlinks"><a href="/">Главная</a><a href="/about.html">О сообществе</a><a href="/local-committees.html">Комитеты</a><a href="/events.html">Мероприятия</a><a href="/news.html">Новости</a><a href="/opportunities.html">Возможности</a><a href="/values.html">Наши ценности</a><a href="/contacts.html">Контакты</a><a href="/search.html">Поиск</a></div>{% endif %}
+    <a class="navbtn" href="/cabinet">Личный кабинет ↗</a>
+  </nav></header>
+  <main class="auth-main">
+    <div class="auth-wrap">
+      <a class="backlink" href="/">← На главную</a>
+      <h1>{{ title }}</h1>
+      <p class="portal-message" id="message" role="status" aria-live="polite"></p>
+
+      {% if mode == "login" %}
+      <p class="auth-sub">Войди, чтобы открыть личный кабинет участника.</p>
+      <form class="auth-form" id="login-form">
+        <label class="field">Логин<input type="text" name="username" autocomplete="username" minlength="3" maxlength="40" required></label>
+        <label class="field">Пароль<input type="password" name="password" autocomplete="current-password" required></label>
+        <button class="btn" type="submit">Войти <span>↗</span></button>
+      </form>
+      <p class="auth-switch">Ещё нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+      {% elif mode == "register" %}
+      <p class="auth-sub">Создай аккаунт. Профиль будет закрыт от других участников; членство появится в реестре на подтверждение.</p>
+      <form class="auth-form" id="register-form">
+        <label class="field">ФИО<input name="full_name" autocomplete="name" minlength="2" maxlength="160" required></label>
+        <label class="field">Логин<input name="username" autocomplete="username" minlength="3" maxlength="40" pattern="[A-Za-z0-9][A-Za-z0-9_.-]{2,39}" required><span class="field-hint">3–40 символов: латинские буквы, цифры, точка, дефис или подчёркивание.</span></label>
+        <label class="field">Университет<input name="university_name" maxlength="200" required></label>
+        <label class="field">Город<input name="city_name" maxlength="120"></label>
+        <label class="field">Курс обучения<input type="number" name="study_year" min="1" max="12" inputmode="numeric"></label>
+        <label class="field">Пароль <span class="field-hint">не менее 12 символов</span><input type="password" name="password" autocomplete="new-password" minlength="12" maxlength="200" required></label>
+        <button class="btn" type="submit">Создать аккаунт <span>↗</span></button>
+      </form>
+      <p class="auth-switch">Уже зарегистрирован? <a href="/login">Войти</a></p>
+      {% elif mode == "cabinet" %}
+      <p class="auth-sub">Личный профиль и статус участия в AMSA Kazakhstan.</p>
+      <div id="cabinet-view" class="hidden">
+        <div class="profile-head"><div class="profile-mark" id="profile-mark">AM</div><div><div class="profile-email" id="profile-email"></div><span class="status-badge" id="membership-status"></span></div></div>
+        <section class="admin-panel notification-panel" aria-labelledby="notifications-title"><div class="admin-panel-head"><div><div class="eyebrow">ОБНОВЛЕНИЯ АККАУНТА</div><h2 id="notifications-title">Уведомления <span id="notification-unread-count" class="notification-count" hidden></span></h2></div><button class="table-action" id="notifications-read-all" type="button" hidden>Отметить все прочитанными</button></div><div id="notification-list" class="notification-list" aria-live="polite"><p class="empty">Загрузка уведомлений…</p></div><button id="notifications-load-more" class="plain-button" type="button" hidden>Загрузить ещё</button></section>
+        <form class="auth-form" id="profile-form">
+          <label class="field">ФИО<input name="full_name" maxlength="160" required></label>
+          <label class="field">Университет<input name="university_name" maxlength="200" required></label>
+          <label class="field">Город<input name="city_name" maxlength="120"></label>
+          <label class="field">Курс обучения<input type="number" name="study_year" min="1" max="12"></label>
+          <label class="field">Интересующий локальный комитет<input name="committee_interest" maxlength="200"></label>
+          <label class="field">Телефон <span class="field-hint">виден только тебе и уполномоченной администрации</span><input type="tel" name="phone" autocomplete="tel" maxlength="40"></label>
+          <button class="btn" type="submit">Сохранить профиль <span>↗</span></button>
+        </form>
+        <section class="admin-panel" aria-labelledby="my-events-title"><div class="admin-panel-head"><div><div class="eyebrow">Моё участие</div><h2 id="my-events-title">Мои мероприятия</h2></div><a href="/events.html">Открыть календарь ↗</a></div><div id="my-events-list" class="committee-grid"><p class="empty">Загружаем записи…</p></div></section>
+        <section class="admin-panel" id="my-certificates" aria-labelledby="my-certificates-title"><div class="admin-panel-head"><div><div class="eyebrow">ПОДТВЕРЖДЕНИЕ УЧАСТИЯ</div><h2 id="my-certificates-title">Мои сертификаты</h2></div></div><div id="my-certificates-list" class="certificate-list"><p class="empty">Загружаем сертификаты…</p></div></section>
+        <section class="admin-panel" aria-labelledby="my-exchanges-title"><div class="admin-panel-head"><div><div class="eyebrow">Международные возможности</div><h2 id="my-exchanges-title">Мои заявки на обмен</h2></div><a href="/opportunities.html#exchange-calls">Открытые наборы ↗</a></div><div id="my-exchange-applications" class="exchange-my-list"><p class="empty">Загружаем заявки…</p></div></section>
+        <section class="admin-panel" aria-labelledby="password-title"><div class="eyebrow">Безопасность аккаунта</div><h2 id="password-title">Смени пароль</h2><form class="auth-form" id="password-form"><label class="field">Текущий пароль<input type="password" name="current_password" autocomplete="current-password" required></label><label class="field">Новый пароль <span class="field-hint">не менее 12 символов</span><input type="password" name="new_password" autocomplete="new-password" minlength="12" maxlength="200" required></label><label class="field">Повтори новый пароль<input type="password" name="confirm_password" autocomplete="new-password" minlength="12" maxlength="200" required></label><button class="btn" type="submit">Обновить пароль ↗</button></form></section>
+        <p class="auth-bottom"><a href="#" id="admin-link" class="hidden">Открыть админ-панель</a><a href="/reports" id="reports-link" class="hidden">Отчётность комитетов</a><a href="#" id="logout-link">Выйти из аккаунта</a></p>
+      </div>
+      {% elif mode == "admin" %}
+      <div id="admin-view" class="hidden">
+        <div class="admin-top"><p class="auth-sub">Реестр участников. Персональные данные доступны только уполномоченным ролям.</p><span class="admin-count" id="member-count"></span></div>
+        <section class="admin-summary" id="admin-summary" aria-label="Сводка организации"><div><strong>—</strong><span>участников</span></div><div><strong>—</strong><span>активных</span></div><div><strong>—</strong><span>ждут проверки</span></div><div><strong>—</strong><span>ближайших событий</span></div><div><strong>—</strong><span>комитетов</span></div><div><strong>—</strong><span>новостей в работе</span></div></section>
+        <form class="search-form" id="search-form"><input name="q" placeholder="Имя, email или университет"><input name="city" placeholder="Город"><input name="university" placeholder="Университет"><button type="submit">Найти</button></form>
+        <section class="admin-panel temporary-password-panel" id="temporary-password-panel" hidden aria-live="polite"><div class="eyebrow">ОДНОРАЗОВЫЙ ДОСТУП</div><h2>Временный пароль создан</h2><p id="temporary-password-owner" class="auth-sub"></p><label class="field">Временный пароль<input id="temporary-password-value" type="text" readonly autocomplete="off" spellcheck="false"></label><p class="field-hint">Он показывается только сейчас. После первого входа пользователь обязан установить личный пароль; старые сессии уже отозваны.</p><div class="temporary-password-actions"><button id="temporary-password-copy" class="table-action" type="button">Скопировать</button><button id="temporary-password-close" class="plain-button" type="button">Скрыть и очистить</button></div></section>
+        <div class="table-scroll"><table class="roster"><thead><tr><th>Участник</th><th>Университет / город</th><th>Комитет / должность</th><th>Статус</th></tr></thead><tbody id="members-list"></tbody></table></div>
+        <p class="auth-bottom"><a href="/api/v1/admin/members.csv">Скачать CSV</a> · <a href="/cabinet">Мой кабинет</a></p>
+      </div>
+      {% endif %}
+    </div>
+  </main>
+  <footer class="footer"><div class="wrap"><span>© 2026 AMSA Kazakhstan</span><a href="https://amsa-international.org/our-members/" target="_blank" rel="noreferrer">AMSA International ↗</a><a href="/">На главную ↑</a></div></footer>
+  <script src="/portal.js" defer></script>
+</body>
+</html>
