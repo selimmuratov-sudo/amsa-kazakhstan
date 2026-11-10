@@ -19,8 +19,10 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, quote, urlparse
 
+import tempfile
+
 ROOT = Path(__file__).resolve().parent
-DATA_DIR = ROOT / "data"
+DATA_DIR = Path(tempfile.gettempdir()) / "data"
 DB_PATH = DATA_DIR / "amsa.sqlite3"
 COOKIE = "amsa_session"
 SESSION_AGE = 7 * 24 * 60 * 60
