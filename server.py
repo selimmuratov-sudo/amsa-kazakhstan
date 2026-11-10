@@ -55,6 +55,7 @@ def db() -> sqlite3.Connection:
     )""")
     con.execute("DELETE FROM sessions WHERE expires < ?", (int(time.time()),))
     con.commit()
+
     try:
         os.chmod(DB_PATH, 0o600)
     except OSError:
